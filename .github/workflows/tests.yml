@@ -1,0 +1,52 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  functional:
+    name: TYPO3 ${{ matrix.typo3 }}, PHP ${{ matrix.php }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - typo3: '12.4'
+            php: '8.1'
+            testing-framework: '^8.2'
+          - typo3: '12.4'
+            php: '8.3'
+            testing-framework: '^8.2'
+          - typo3: '13.4'
+            php: '8.2'
+            testing-framework: '^8.2'
+          - typo3: '13.4'
+            php: '8.4'
+            testing-framework: '^9.0'
+          - typo3: '14.3'
+            php: '8.2'
+            testing-framework: '^9.0'
+          - typo3: '14.3'
+            php: '8.4'
+            testing-framework: '^9.0'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: intl, mbstring, pdo_sqlite
+          coverage: none
+
+      - name: Install TYPO3 ${{ matrix.typo3 }}
+        run: |
+          composer require --no-update --no-interaction "typo3/cms-core:^${{ matrix.typo3 }}"
+          composer require --dev --no-update --no-interaction "typo3/cms-beuser:^${{ matrix.typo3 }}" "typo3/testing-framework:${{ matrix.testing-framework }}"
+          composer update --no-interaction --no-progress
+
+      - name: Functional tests
+        env:
+          typo3DatabaseDriver: pdo_sqlite
+        run: .Build/bin/phpunit -c Build/phpunit/FunctionalTests.xml --display-deprecations

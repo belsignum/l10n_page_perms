@@ -1,0 +1,51 @@
+{
+	"name": "belsignum/l10n-page-perms",
+	"description": "Keeps the access rights of page translations equal to their default language page and repairs translations that fell behind. Workaround for TYPO3 core bug #89838.",
+	"type": "typo3-cms-extension",
+	"license": "GPL-2.0-or-later",
+	"keywords": [
+		"TYPO3",
+		"permissions",
+		"translation",
+		"localization",
+		"access module"
+	],
+	"authors": [
+		{
+			"name": "Andreas Sommer",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": "^8.1",
+		"typo3/cms-core": "^12.4 || ^13.4 || ^14.3"
+	},
+	"require-dev": {
+		"typo3/cms-beuser": "^12.4 || ^13.4 || ^14.3",
+		"typo3/testing-framework": "^8.2 || ^9.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"Belsignum\\L10nPagePerms\\": "Classes/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Belsignum\\L10nPagePerms\\Tests\\": "Tests/"
+		}
+	},
+	"config": {
+		"vendor-dir": ".Build/vendor",
+		"bin-dir": ".Build/bin",
+		"allow-plugins": {
+			"typo3/class-alias-loader": true,
+			"typo3/cms-composer-installers": true
+		}
+	},
+	"extra": {
+		"typo3/cms": {
+			"extension-key": "l10n_page_perms",
+			"web-dir": ".Build/Web"
+		}
+	}
+}

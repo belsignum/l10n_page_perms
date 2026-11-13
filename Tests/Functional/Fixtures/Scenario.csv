@@ -1,0 +1,17 @@
+"be_groups"
+,"uid","pid","title","tables_modify","tables_select","non_exclude_fields","db_mountpoints","workspace_perms"
+,4,0,"owner-grp","pages","pages","pages:backend_layout,pages:backend_layout_next_level,pages:title","1",1
+"be_users"
+,"uid","pid","username","password","admin","usergroup","workspace_perms","deleted","disable"
+,1,0,"admin","x",1,"",1,0,0
+,2,0,"editor","x",0,"4",1,0,0
+"pages"
+,"uid","pid","sys_language_uid","l10n_parent","title","perms_userid","perms_groupid","perms_user","perms_group","perms_everybody","backend_layout","backend_layout_next_level","nav_hide","deleted","t3ver_wsid"
+,1,0,0,0,"Root",1,4,31,27,0,"","",0,0,0
+,2,1,0,0,"Page",1,2,31,27,0,"pagets__new","",0,0,0
+,3,1,1,2,"Page AT",1,2,31,27,0,"pagets__old","",1,0,0
+,4,1,2,2,"Page EN",1,2,31,27,0,"pagets__old","",0,0,0
+,5,1,0,0,"Other",1,4,31,27,0,"pagets__new","",0,0,0
+,6,1,1,5,"Other AT",1,4,31,27,0,"pagets__new","",0,0,0
+,7,1,0,0,"Owned by editor",2,2,31,27,0,"pagets__new","",0,0,0
+,8,1,1,7,"Owned by editor AT",1,2,31,27,0,"pagets__new","",0,0,0
