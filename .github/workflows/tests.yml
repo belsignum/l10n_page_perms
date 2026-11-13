@@ -40,6 +40,12 @@ jobs:
           extensions: intl, mbstring, pdo_sqlite
           coverage: none
 
+      # All free TYPO3 12.4 releases are affected by security advisories (fixes only in ELTS), and Composer
+      # refuses to install them. The tests do not run a site, so the block is lifted for 12.4 only.
+      - name: Allow TYPO3 12.4 despite security advisories
+        if: matrix.typo3 == '12.4'
+        run: composer config policy.advisories.block false
+
       - name: Install TYPO3 ${{ matrix.typo3 }}
         run: |
           composer require --no-update --no-interaction "typo3/cms-core:^${{ matrix.typo3 }}"
